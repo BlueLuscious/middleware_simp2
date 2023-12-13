@@ -1,0 +1,53 @@
+$code = 49401;
+        $unique_reference = "39168246";
+        $date = "2023-12-01 15:36:00";
+        $amount = "41419.88";
+        
+        // Realizar consulta de deudas al simp2 con un numero de cliente "code"
+        $debts = Http::withHeaders([
+            'X-API-KEY' => env('API_KEY'),
+            'company-transaction-token' => env('CTT')
+        ])->get(env('URL_BASE')."/debt/general/".$code)->throw()->body();
+        $debts = json_decode($debts);
+
+        // Realizar una notificación de pago al simp2 con la referencia unica de deuda "unique_reference"
+        $payment = Http::withHeaders([
+            'X-API-KEY' => env('API_KEY'),
+            'company-transaction-token' => env('CTT')
+        ])->post(env('URL_BASE')."/payments/notify", [
+            "unique_reference" => $unique_reference,
+            "date" => $date,
+            "amount" => $amount
+        ])->throw();
+        $message = $payment->body();
+        $status = $payment->status();
+        
+        // Realizar una notificación de rollback con la referencia unica de deuda "unique_reference" al igual que en la notificacion/confirmacion de pago / reversa
+        $rollback = Http::withHeaders([
+            'X-API-KEY' => env('API_KEY'),
+            'company-transaction-token' => env('CTT')
+        ])->post(env('URL_BASE')."/reverse/notify", [
+            "unique_reference" => $unique_reference,
+            "date" => $date
+        ])->throw();
+
+        $message = $rollback->body();
+        $status = $rollback->status();
+        dd("$status $message");
+        /*
+        endpoints:
+        /payments/notify
+        /payments/confirm
+        /reverse/notify
+        /reverse/confirm
+        */
+
+
+API_KEY=441AEiUJ23DvpcRG0VlhEcJfGltd6GWc
+URL_BASE=https://core.sandbox.simp2.com/api/v1
+CTT=jnKh2zstgz0p
+https://core.sandbox.simp2.com/api/documentation
+
+$date = CarbonImmutable::create("2023-12-01 15:36:00")->format("Y-m-d H:i:s");
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Http;
