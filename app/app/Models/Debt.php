@@ -2,10 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Debt extends Model
 {
-    use HasFactory;
+    protected $table = 'Debts';
+    protected $fillable = [
+        'code',
+        'status',
+        'api_client',
+        'ccf_code',
+        'ccf_client_id',
+        'ccf_client_data',
+        'client_origin_id',
+        'subdebts',
+    ];
 }

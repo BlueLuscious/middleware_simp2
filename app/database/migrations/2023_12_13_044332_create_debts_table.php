@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
+
+            $table->string('code');
+            $table->string('status');
+            $table->string('api_client');
+            $table->string('ccf_code');
+            $table->string('ccf_client_id');
+            $table->string('ccf_client_data');
+            $table->string('client_origin_id');
+            $table->string('subdebts');
+
             $table->timestamps();
         });
     }
