@@ -1,0 +1,16 @@
+composer:
+    # composer create-project laravel/laravel example-app --> (create proyect)
+
+artisan:
+    # php artisan serve --> (run server)
+    # php artisan migrate --> (migrate)
+    # php artisan make:model Post -cmf (controller, migration, factory)
+    # php artisan make:controller Api/V1/PostController --api --model=Post (created in predifined folder and with predifined model)
+    # php artisan make:resource V1/PostResource
+
+    # php artisan route:list
+
+MySQL CLC:
+    # SHOW DATABASES;
+    # SELECT @@datadir
+    # system cls
