@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ConektaController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\RequestDebtController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['api'])->group(function () {
     Route::resource('/debts', DebtController::class)->only('index', 'show');
-    Route::get('/get-debts', [DebtController::class, 'createDebt']);
-    Route::get('/show-debts', [DebtController::class, 'showDebt']);
+    Route::get('/get-debts', [RequestDebtController::class, 'createDebt']);
+    Route::get('/show-debts', [RequestDebtController::class, 'showDebt']);
 });
