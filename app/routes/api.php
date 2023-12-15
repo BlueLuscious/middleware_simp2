@@ -14,4 +14,6 @@ Route::middleware(['api'])->group(function () {
     Route::resource('/debts', DebtController::class)->only('index', 'show');
     Route::get('/get-debts', [RequestDebtController::class, 'createDebt']);
     Route::get('/show-debts', [RequestDebtController::class, 'showDebt']);
+    Route::get('/checkouts/{debtId}', [ConektaController::class, 'getPaymentLinkConekta']);
+    // Route::post(env('CONEKTA_URL_BASE').'/checkouts/{debtId}', [ConektaController::class, 'postDebtToConekta']);
 });
