@@ -12,7 +12,7 @@ class Simp2Middleware
     {
         try {
             $code = 49401; // show all subdebts
-            $unique_reference = 39168246; // show one of the subdebts
+            $unique_reference = 39168246; // show one of the subdebts (1 = 39168245, 2 = 39168246, 3 = 39999988)
 
             $response = Http::withHeaders([
                 'X-API-KEY' => env('SIMP2_API_KEY'),

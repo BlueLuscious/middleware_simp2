@@ -26,7 +26,7 @@ class DebtController extends Controller
             // Procesar y almacenar la deuda en la base de datos
             foreach ($debtsData as $debtData) {
                 $subdebts = json_encode($debtData['subdebts']);
-                $clientData = json_encode($debtData['ccf_client_data']); 
+                $clientData = json_encode($debtData['ccf_client_data']);
 
                 Debt::create([
                     'code' => $debtData['code'],
