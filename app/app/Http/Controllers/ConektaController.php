@@ -41,7 +41,7 @@ class ConektaController extends Controller
                 return response()->json(['error' => 'La deuda no existe en la base de datos'], 404);
             }
     
-            $paymentLinkConekta = [
+            $debtData = [
                 'name' => 'Payment Link Name',
                 'type' => 'PaymentLink',
                 'recurrent' => false,
@@ -59,11 +59,12 @@ class ConektaController extends Controller
                 ],
             ];
 
-            $response = $this->conektaService->getPaymentLink($paymentLinkConekta);
-            //dd($response);
+            $postPaymentLink = $this->conektaService->postPaymentLink($debtData);
+            $getPaymentLink = $this->conektaService->getPaymentLinkById($debtData, $debtId);
 
-            if ($response) {
-                return response()->json(['message' => 'Exito al obtener el link de pago', 'response' => $response], 201);
+            if ($getPaymentLink) {
+                //dd($response);
+                return response()->json(['message' => 'Exito al obtener el link de pago', 'response' => $getPaymentLink], 201);
             } else {
                 return response()->json(['error' => 'No se pudo obtenet el link de pago'], 500);
             }

@@ -20,12 +20,23 @@ class ConektaService
         ]);
     }
 
-    public function getPaymentLink($debtData)
+    public function getPaymentLinkById($debtData, $debtId)
     {
-        $response = $this->client->get("/checkouts", [
+        $response = $this->client->get("/checkouts/{$debtId}", [
             'json' => $debtData,
         ]);
+        //dd($debtData);
 
-        return response()->json(['data' => json_decode($response->getBody()->getContents())]);
+        return json_decode($response->getBody()->getContents());
+    }
+
+    public function postPaymentLink($debtData)
+    {
+        $response = $this->client->post("/checkouts", [
+            'json' => $debtData,
+        ]);
+        //dd($debtData);
+
+        return json_decode($response->getBody()->getContents());
     }
 }
